@@ -16,9 +16,7 @@ class Car:
         self._model = model
         self._year = year
         
-    # def __new__(self):
-    #     ...
-
+   
     
     # set new brand name
     def set_brand(self, new_brand):
@@ -26,12 +24,20 @@ class Car:
             self._brand = new_brand
         else:
             raise ValueError ("Brand name must contain only letters")
+    
+    #get brand name
+    def get_brand(self):
+        print(self._brand)
         
 
     # set new model name   
     def set_model(self, new_model):
        
        self._model = new_model
+
+    # get model name
+    def get_model(self):
+        print(self._model)
         
 
     # Set new year
@@ -40,17 +46,22 @@ class Car:
             self._year = updated_year
         else:
             print(f"Invalid year: {updated_year}. It must be an integer.")
-  
 
-    # Get full information
-    def get(self):
+    #get year
+    def get_year(self):
+        print(self._year)
+
+    #get full info 
+    def get_full_info(self):
         print(f"Brand: {self._brand}, Model: {self._model}, {self._year} Year")
-        
+
+
 
 car1 = Car("Mersedes", "C200", 2005)
-car1.get()
+car1.get_full_info()
 car1.set_model("E500")
-car1.get()
+car1.get_model()
 car1.set_year(2001)
 car1.set_brand("Audi")
-car1.get()
+car1.get_brand()
+car1.get_full_info()
