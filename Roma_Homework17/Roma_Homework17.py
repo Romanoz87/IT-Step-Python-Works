@@ -21,8 +21,9 @@ from json import JSONEncoder
 
 class Student:
     row_id = 1
-    def __init__(self, row, name, mark, address):
-        self.row = row
+    def __init__(self, name, mark, address, row_id=1):
+        self.row_id = Student.row_id
+        
         self.name = name
         self._mark = mark
         self.address = address
@@ -38,9 +39,7 @@ class Student:
     def mark(self, new_mark):
         self._mark = new_mark
 
-    @staticmethod
-    def get_counter():
-        return Student.row_id  
+
 
 class Address(Student):
     def __init__(self, city, street):
@@ -64,17 +63,17 @@ class Encode(JSONEncoder):
     
 
     
-st1 = Student(Student.get_counter(), 'Nikoloz', 51, Address('Tbilisi', 'Ortachala'))
+st1 = Student('Nikoloz', 51, Address('Tbilisi', 'Ortachala'))
     
-st2 = Student(Student.get_counter(), 'Giorgi', 88, Address('Tbilisi', 'Didube'))
+st2 = Student('Giorgi', 88, Address('Tbilisi', 'Didube'))
               
-st3 = Student(Student.get_counter(), 'Davit', 95, Address('Tbilisi', 'Rustaveli ave'))
+st3 = Student('Davit', 95, Address('Tbilisi', 'Rustaveli ave'))
                
-st4 = Student(Student.get_counter(), 'Nana', 98, Address('Tbilisi', 'Nutsubidze 4 distr'))
+st4 = Student('Nana', 98, Address('Tbilisi', 'Nutsubidze 4 distr'))
                
-st5 = Student(Student.get_counter(), 'Tamari', 72, Address('Tbilisi', 'Digomi'))
+st5 = Student('Tamari', 72, Address('Tbilisi', 'Digomi'))
            
-st6 = Student(Student.get_counter(), 'Joni', 69, Address('Tbilisi', 'Didube'))
+st6 = Student('Joni', 69, Address('Tbilisi', 'Didube'))
 
 
 
@@ -93,7 +92,7 @@ json_student = json.dumps(students, cls=Encode, indent=2)
 
 
 # ვწერთ მონაცემებს json ფაილში
-with open('students_data1.json', mode='w', encoding='utf8') as file:              
+with open('students_data5.json', mode='w', encoding='utf8') as file:              
     json_info1 = json.dump(students, file, cls=Encode, indent=2)
 
 
@@ -102,7 +101,7 @@ print('-'*100)
 print(f"{'N':<4} {'Name':<10} {'mark':<11}{'City':<10}{'Street':<25}{'Grade'}")
 print('='*100)
 
-with open('students_data1.json', mode = 'r', encoding='utf-8') as file:
+with open('students_data5.json', mode = 'r', encoding='utf-8') as file:
     json_info = json.load(file)
 
     # ქულის შეცვლა 
@@ -123,11 +122,11 @@ with open('students_data1.json', mode = 'r', encoding='utf-8') as file:
         else:
             value = 'A'
         stud.update({"grade": value})
-        print(f"{stud['row']:<5}{stud['name']:<10} {stud['_mark']:<10} {stud['address']['city']:<10}{stud['address']['_street']:<25}{stud['grade']}")
+        print(f"{stud['row_id']:<5}{stud['name']:<10} {stud['_mark']:<10} {stud['address']['city']:<10}{stud['address']['_street']:<25}{stud['grade']}")
 
 
 # შეცვლილ მონაცემებს ვწერთ json ფაილში
-with open('students_data1.json', mode = 'w', encoding='utf-8') as file:
+with open('students_data5.json', mode = 'w', encoding='utf-8') as file:
     json.dump(json_info,  file, cls=Encode, indent=2)
   
 
