@@ -1,0 +1,57 @@
+-- Active: 1736414873906@@127.0.0.1@3306@hw_26
+CREATE DATABASE IF NOT EXISTS hw_26;
+
+USE hw_26;
+
+CREATE Table authors(
+  authorsID INT PRIMARY KEY AUTO_INCREMENT,
+  authorName VARCHAR(50),
+  authorLastname VARCHAR(50)
+);
+
+INSERT INTO authors(`authorName`, `authorLastname`)
+VALUES
+("Ilia", "Chavchavadze"),
+("Vaja", "Pshavela"),
+("Jack", "London"),
+("Leo", "Tolstoy"),
+("Konstantine", "Gamsaxurdia")
+;
+
+CREATE Table books(
+  bookId INT PRIMARY KEY AUTO_INCREMENT,
+  bookName VARCHAR(50),
+  authorsID INT,
+  Foreign Key (authorsID) REFERENCES authors(authorsID)
+)
+;
+
+INSERT INTO books(`bookName`, `authorsID`)
+VALUES
+("Kacia Adamiani", 1),
+("Stumar Maspindzeli", 2),
+("Martin Iden", 3),
+("Glaxis Naambobi", 1),
+("Ana Carenina", 4),
+("Didostatis Marjvena", 5)
+;
+
+UPDATE books
+SET `bookName` = "Gandegili"
+WHERE `bookId` = 1
+;
+
+SELECT authors.authorName, authors.authorLastname, books.bookName
+FROM authors
+JOIN books ON authors.authorsID = books.authorsID;
+
+
+DELETE FROM books;
+
+DELETE FROM authors;
+
+TRUNCATE Table books;
+
+TRUNCATE Table authors;
+
+DROP DATABASE IF EXISTS hw_26

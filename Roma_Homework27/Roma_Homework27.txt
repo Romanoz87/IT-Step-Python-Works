@@ -1,0 +1,87 @@
+-- Active: 1736342364045@@127.0.0.1@3306@homework27
+-- Active: 1736342364045@@127.0.0.1@3306@homework27
+CREATE TABLE migrations(
+    id INT,
+    distance INT,
+    days INT  
+);
+CREATE TABLE sea_lions(
+    id INT,
+    name VARCHAR(50) NOT NULL,
+    species VARCHAR(50) NOT NULL
+);
+
+INSERT INTO migrations(`id`, `distance`, `days`)
+VALUES
+(10484, 1000, 107),
+(11728, 1531, 56),
+(11729, 1370, 37),
+(11732, 1622, 62),
+(11734, 1491, 58),
+(11735, 2723, 82),
+(11736, 1571, 52),
+(11737, 1957, 92)
+;
+
+INSERT INTO sea_lions(`id`, `name`, `species`)
+VALUES
+(10484, 'Ayah', 'Zalophus californianus'),
+(11728, 'Spot', 'Zalophus californianus'),
+(11729, 'Tiger', 'Zalophus californianus'),
+(11732, 'Mabel', 'Zalophus californianus'),
+(11734, 'Rick', 'Zalophus californianus'),
+(11790, 'Jolee', 'Zalophus californianus')
+;
+
+
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM sea_lions
+JOIN migrations on migrations.`id` = sea_lions.`id`
+;
+
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+LEFT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+;
+
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+RIGHT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+
+;
+
+
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+RIGHT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+UNION
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+LEFT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+WHERE  sea_lions.`name` != NULL
+;
+
+
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+RIGHT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+UNION ALL
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+LEFT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+WHERE sea_lions.name IS NULL OR sea_lions.species IS NULL
+;
+
+
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+RIGHT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+UNION 
+SELECT migrations.`days`, migrations.`distance`, sea_lions.`name`, sea_lions.`species`
+FROM migrations
+LEFT JOIN sea_lions on migrations.`id` = sea_lions.`id`
+;
+
+
+
+
